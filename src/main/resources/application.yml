@@ -1,0 +1,6 @@
+server:
+  port: 9001
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://henry:Leandro2009*@cluster0.wbw5c.mongodb.net/dw-wallet-service?retryWrites=true&w=majority&appName=Cluster0
