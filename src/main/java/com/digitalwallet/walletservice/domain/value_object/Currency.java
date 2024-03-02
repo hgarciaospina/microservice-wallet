@@ -6,11 +6,14 @@ import org.springframework.http.HttpStatus;
 import java.util.List;
 
 public record Currency(String value) {
-    public Currency(String value) {
-        this.value = value;
-        this.ensureIsValidCurrency(value);
+    public Currency {
+        if (value == null) {
+            throw new WalletGenericClientException("You must enter a type of currency.",
+                    "400",
+                    HttpStatus.BAD_REQUEST);
+        }
+        ensureIsValidCurrency(value);
     }
-
     private void ensureIsValidCurrency(String value){
         List<String> currencyList = List.of("USD");
         if(!currencyList.contains(value))
