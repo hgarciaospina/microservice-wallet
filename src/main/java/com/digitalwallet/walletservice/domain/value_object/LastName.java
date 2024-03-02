@@ -4,8 +4,12 @@ import com.digitalwallet.walletservice.domain.exceptions.WalletGenericClientExce
 import org.springframework.http.HttpStatus;
 
 public record LastName(String value){
-    public LastName(String value){
-        this.value = value;
+    public LastName{
+        if (value == null) {
+            throw new WalletGenericClientException("You must enter a last name.",
+                    "400",
+                    HttpStatus.BAD_REQUEST);
+        }
         this.ensureIsValidLastName(value);
     }
     private void ensureIsValidLastName(String value){

@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 public record Email(String value) {
     public Email {
         if (value == null) {
-            throw new WalletGenericClientException("You must enter an email",
+            throw new WalletGenericClientException("You must enter an email.",
                     "400",
                     HttpStatus.BAD_REQUEST);
         }

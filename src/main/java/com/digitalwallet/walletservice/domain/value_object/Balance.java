@@ -6,14 +6,18 @@ import org.springframework.http.HttpStatus;
 import java.math.BigDecimal;
 
 public record Balance(BigDecimal value) {
-    public Balance(BigDecimal value) {
-        this.value = value;
+    public Balance{
+        if (value == null) {
+            throw new WalletGenericClientException("You must enter a balance.",
+                    "400",
+                    HttpStatus.BAD_REQUEST);
+        }
         this.ensureIsBalancePositiveValue(value);
     }
     private void ensureIsBalancePositiveValue(BigDecimal value){
         if(value.compareTo(BigDecimal.ZERO) < 0){
-            throw new WalletGenericClientException("The balance must be greater than zero",
-                    "404",
+            throw new WalletGenericClientException("The balance must be greater than zero.",
+                    "400",
                     HttpStatus.BAD_REQUEST);
         }
     }

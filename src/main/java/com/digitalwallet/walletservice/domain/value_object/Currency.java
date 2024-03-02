@@ -12,7 +12,7 @@ public record Currency(String value) {
                     "400",
                     HttpStatus.BAD_REQUEST);
         }
-        ensureIsValidCurrency(value);
+        this.ensureIsValidCurrency(value);
     }
     private void ensureIsValidCurrency(String value){
         List<String> currencyList = List.of("USD");

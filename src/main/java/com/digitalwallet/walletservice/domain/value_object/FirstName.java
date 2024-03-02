@@ -4,14 +4,18 @@ import com.digitalwallet.walletservice.domain.exceptions.WalletGenericClientExce
 import org.springframework.http.HttpStatus;
 
 public record FirstName(String value){
-    public FirstName(String value){
-        this.value = value;
+    public FirstName{
+        if (value == null) {
+            throw new WalletGenericClientException("You must enter a first name.",
+                    "400",
+                    HttpStatus.BAD_REQUEST);
+        }
         this.ensureIsValidFirstName(value);
     }
     private void ensureIsValidFirstName(String value){
-        if(!value.matches("^[A-Za-záéíóúñ'\\s]+(?:[A-Za-záéíóúñ'\\s]+)*$"))
+        if(!value.matches("^[A-Za-záéíóúÁÉÍÓÚüÜñÑ'\\s]++([A-Za-záéíóúÁÉÍÓÚüÜñÑ'\\s]++)*+$"))
             throw new WalletGenericClientException("First name is invalid",
-                    "404",
+                    "400",
                     HttpStatus.BAD_REQUEST);
     }
 }

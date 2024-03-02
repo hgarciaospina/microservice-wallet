@@ -4,14 +4,18 @@ import com.digitalwallet.walletservice.domain.exceptions.WalletGenericClientExce
 import org.springframework.http.HttpStatus;
 
 public record DocumentNumber(String value) {
-    public DocumentNumber(String value) {
-        this.value = value;
+    public DocumentNumber{
+        if (value == null) {
+            throw new WalletGenericClientException("You must enter a document number.",
+                    "400",
+                    HttpStatus.BAD_REQUEST);
+        }
         this.ensureIsValidDocumentNumber(value);
     }
     private void ensureIsValidDocumentNumber(String value){
         if (!value.matches("^[1-9]\\d{7}$"))
             throw new WalletGenericClientException("Document number is invalid",
-                    "404",
+                    "400",
                     HttpStatus.BAD_REQUEST);
     }
 }

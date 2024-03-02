@@ -4,14 +4,18 @@ import com.digitalwallet.walletservice.domain.exceptions.WalletGenericClientExce
 import org.springframework.http.HttpStatus;
 
 public record PhoneNumber(String value) {
-    public PhoneNumber(String value){
-        this.value = value;
+    public PhoneNumber{
+        if (value == null) {
+            throw new WalletGenericClientException("You must enter a phone number.",
+                    "400",
+                    HttpStatus.BAD_REQUEST);
+        }
         this.ensureIsValidPhoneNumber(value);
     }
     private void ensureIsValidPhoneNumber(String value){
         if(!value.matches("^\\+?519\\d{8}$"))
             throw new WalletGenericClientException("Phone number is invalid",
-                    "404",
+                    "400",
                     HttpStatus.BAD_REQUEST);
     }
 }
