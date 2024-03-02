@@ -42,7 +42,7 @@ public class WalletRepositoryImpl implements WalletRepository {
     public Wallet findByPhoneNumber(String phoneNumber) {
         WalletDocument walletDocumentFound = walletMongoRepository
                 .findByCustomerPhoneNumber(phoneNumber)
-                .orElseThrow(() -> new WalletGenericClientException("Wallet not found", HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new WalletGenericClientException("Wallet not found", "404", HttpStatus.NOT_FOUND));
         return walletPersistenceMapper.toDomain(walletDocumentFound);
     }
 
@@ -50,7 +50,7 @@ public class WalletRepositoryImpl implements WalletRepository {
     public Wallet findById(String walletId) {
         WalletDocument walletDocument = walletMongoRepository
                 .findById(walletId)
-                .orElseThrow(() -> new WalletGenericClientException("Wallet not found", HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new WalletGenericClientException("Wallet not found", "404", HttpStatus.NOT_FOUND));
         return walletPersistenceMapper.toDomain(walletDocument);
     }
 }

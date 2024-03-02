@@ -7,9 +7,9 @@ import java.math.BigDecimal;
 
 public class Wallet {
     private String walletId;
-    private Balance balance;
-    private Currency currency;
-    private Customer customer;
+    private final Balance balance;
+    private final Currency currency;
+    private final Customer customer;
 
     public Wallet(String walletId, BigDecimal balance, String currency, Customer customer) {
         this.walletId = walletId;

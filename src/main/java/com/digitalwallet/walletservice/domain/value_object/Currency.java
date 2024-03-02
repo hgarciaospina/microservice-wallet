@@ -15,7 +15,7 @@ public record Currency(String value) {
         List<String> currencyList = List.of("USD");
         if(!currencyList.contains(value))
             throw new WalletGenericClientException("Currency is invalid",
-                    "404",
+                    "400",
                     HttpStatus.BAD_REQUEST);
     }
 }
