@@ -2,7 +2,7 @@ package com.digitalwallet.walletservice.domain.exceptions;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
-import org.springframework.http.HttpStatus;
+
 
 import java.time.LocalDateTime;
 
